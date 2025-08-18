@@ -79,7 +79,4 @@ export default function LandingPage() {
     </div>
   );
 }
-function preventDefault() {
-  throw new Error("Function not implemented.");
-}
 
