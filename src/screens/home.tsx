@@ -1,7 +1,32 @@
+
+import { useEffect } from "react"
+
 export default function LandingPage() {
+
+  const handleIndex = async () => {
+    try {
+      const city = "columbus";
+      const res = await fetch(`http://localhost:8000/api/getEvents?city=${encodeURIComponent(city)}`)
+      const songs = await res.json()
+      console.log(songs)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    handleIndex()
+  }, [])
+
+
+
+
+
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center">
       {/* Header / Logo */}
+
       <header className="w-full flex justify-between items-center p-6 bg-white shadow-md">
         <h1 className="text-2xl font-bold text-blue-600">SpotBeat</h1>
         <nav>
