@@ -1,11 +1,13 @@
 
-import { useEffect } from "react"
+import { useState } from "react"
 
 export default function LandingPage() {
+  const [city, setCity] = useState<string>('')
 
-  const handleIndex = async () => {
+  const handleIndex = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     try {
-      const city = "columbus";
       const res = await fetch(`http://localhost:8000/api/getEvents?city=${encodeURIComponent(city)}`)
       const songs = await res.json()
       console.log(songs)
@@ -14,13 +16,9 @@ export default function LandingPage() {
     }
   }
 
-  useEffect(() => {
-    handleIndex()
-  }, [])
-
-
-
-
+  // useEffect(() => {
+  //   handleIndex()
+  // }, [])
 
 
   return (
@@ -36,6 +34,14 @@ export default function LandingPage() {
             <li className="text-gray-700 font-semibold">Sign Up</li>
           </ul>
         </nav>
+        <form onSubmit={handleIndex}>
+          <input
+            value={city}
+            name='city'
+            onChange={(e) => setCity(e.target.value)} />
+
+          <button type='submit'>Lookup</button>
+        </form>
       </header>
 
       {/* Hero Section */}
@@ -65,6 +71,7 @@ export default function LandingPage() {
         ))}
       </section>
 
+
       {/* Footer */}
       <footer className="w-full bg-white mt-24 p-6 text-center text-gray-500">
         © 2025 SpotBeat. All rights reserved.
@@ -72,3 +79,7 @@ export default function LandingPage() {
     </div>
   );
 }
+function preventDefault() {
+  throw new Error("Function not implemented.");
+}
+
